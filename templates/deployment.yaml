@@ -91,7 +91,11 @@ spec:
                 exec:
                   command:
                   - rcon
-                  - --address $(hostname):$RCON_PORT --password $RCON_PASSWORD players | grep "connected"
+                  - -a 
+                  - $(hostname):$RCON_PORT 
+                  - -p 
+                  - $RCON_PASSWORD 
+                  - players
                 initialDelaySeconds: 90
                 periodSeconds: 30
             volumes:
