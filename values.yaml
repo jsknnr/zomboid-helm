@@ -11,7 +11,7 @@ volumes:
     size: 50Gi
   configPVC:
     size: 50Gi
-  storageClassName: local-path
+  storageClassName: ""
 env:
   adminPassword: changeme
   adminUsername: admin

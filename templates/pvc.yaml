@@ -30,4 +30,6 @@ spec:
     resources:
         requests:
             storage: {{ .Values.volumes.configPVC.size }}
+        {{- if ne .Values.volumes.storageClassName "" }}
         storageClassName: {{ .Values.volumes.storageClassName }}
+        {{- end }}
