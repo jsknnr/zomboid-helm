@@ -9,3 +9,6 @@ keywords:
 home: https://projectzomboid.com
 sources:
 - https://github.com/jsknnr/zomboid-dedicated-server
+maintainers:
+  - name: jsknnr
+    url: https://github.com/jsknnr

@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: "{{ .Chart.name }}-service"
+    name: "{{ .Chart.Name }}-service"
     labels:
-        app: "{{ .Chart.name }}"
-        chart: "{{ .Chart.name }}-{{ .Chart.Version }}"
+        app: "{{ .Chart.Name }}"
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
         release: "{{ .Release.Name }}"
         heritage: "{{ .Release.Service }}"
 spec:
