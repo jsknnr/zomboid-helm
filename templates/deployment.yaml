@@ -4,7 +4,7 @@ metadata:
     name: "{{ .Chart.name }}-server"
     labels:
         app: "{{ .Chart.name }}"
-        chart: "{{ .Chart.name }}-{{ .Chart.Version }}"
+        chart: "{{ .Chart.name }}-{{ .Chart.version }}"
         release: "{{ .Release.Name }}"
         heritage: "{{ .Release.Service }}"
 spec:
@@ -89,7 +89,7 @@ spec:
             volumes:
             - name: zomboidData
               persistentVolumeClaim:
-                claimName: "{{ .Chart.Name }}-pvc-data"
+                claimName: "{{ .Chart.name }}-pvc-data"
             - name: zomboidConfig
               persistentVolumeClaim:
-                claimName: "{{ .Chart.Name }}-pvc-config"
+                claimName: "{{ .Chart.name }}-pvc-config"

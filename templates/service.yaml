@@ -4,7 +4,7 @@ metadata:
     name: "{{ .Chart.name }}-service"
     labels:
         app: "{{ .Chart.name }}"
-        chart: "{{ .Chart.name }}-{{ .Chart.Version }}"
+        chart: "{{ .Chart.name }}-{{ .Chart.version }}"
         release: "{{ .Release.Name }}"
         heritage: "{{ .Release.Service }}"
 spec:
