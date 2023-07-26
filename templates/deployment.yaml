@@ -82,14 +82,14 @@ spec:
                 containerPort: {{ .Values.env.rconPort | int }}
                 protocol: TCP
               volumeMounts:
-              - name: zomboidData
+              - name: zomboid-data
                 mountPath: /home/steam/ZomboidDedicatedServer
-              - name: zomboidConfig
+              - name: zomboid-onfig
                 mountPath: /home/steam/Zomboid
             volumes:
-            - name: zomboidData
+            - name: zomboid-data
               persistentVolumeClaim:
                 claimName: "{{ .Chart.Name }}-pvc-data"
-            - name: zomboidConfig
+            - name: zomboid-config
               persistentVolumeClaim:
                 claimName: "{{ .Chart.Name }}-pvc-config"
