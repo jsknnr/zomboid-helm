@@ -1,0 +1,33 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+    name: "{{ .Chart.Name }}-pvc-data"
+    labels:
+        app: "{{ .Chart.name }}"
+        chart: "{{ .Chart.name }}-{{ .Chart.Version }}"
+        release: "{{ .Release.Name }}"
+        heritage: "{{ .Release.Service }}"
+spec:
+    accessModes:
+        - ReadWriteOnce
+    resources:
+        requests:
+            storage: {{ .Values.volumes.dataPVC.size }}
+        storageClassName: {{ .Values.volumes.storageClassName }}
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+    name: "{{ .Chart.Name }}-pvc-config"
+    labels:
+        app: "{{ .Chart.name }}"
+        chart: "{{ .Chart.name }}-{{ .Chart.Version }}"
+        release: "{{ .Release.Name }}"
+        heritage: "{{ .Release.Service }}"
+spec:
+    accessModes:
+        - ReadWriteOnce
+    resources:
+        requests:
+            storage: {{ .Values.volumes.configPVC.size }}
+        storageClassName: {{ .Values.volumes.storageClassName }}
