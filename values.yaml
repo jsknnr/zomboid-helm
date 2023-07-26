@@ -4,7 +4,7 @@ imageTag: latest
 serviceType: LoadBalancer
 resources:
   requests:
-    memory: 1G
+    memory: 2G
     cpu: 1.0
 volumes:
   dataPVC:
@@ -22,7 +22,7 @@ env:
   gcConfig: ZGC
   mapNames: Muldraugh, KY
   maxPlayers: 16
-  maxRAM: 1024m
+  maxRAM: 2048m
   modNames: ''
   modWorkshopIDs: ''
   pauseOnEmpty: true
