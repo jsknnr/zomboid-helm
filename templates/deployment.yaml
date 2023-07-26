@@ -15,6 +15,7 @@ spec:
             release: "{{ .Release.Name }}"
     template:
         metadata:
+          labels:
             app: "{{ .Chart.Name }}"
             release: "{{ .Release.Name }}"
         spec:
@@ -84,7 +85,7 @@ spec:
               volumeMounts:
               - name: zomboid-data
                 mountPath: /home/steam/ZomboidDedicatedServer
-              - name: zomboid-onfig
+              - name: zomboid-config
                 mountPath: /home/steam/Zomboid
             volumes:
             - name: zomboid-data
