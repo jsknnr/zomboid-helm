@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: "{{ .Chart.name }}-server"
+    name: "{{ .Chart.Name }}-server"
     labels:
-        app: "{{ .Chart.name }}"
-        chart: "{{ .Chart.name }}-{{ .Chart.version }}"
+        app: "{{ .Chart.Name }}"
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
         release: "{{ .Release.Name }}"
         heritage: "{{ .Release.Service }}"
 spec:
     replicas: {{ .Values.replicaCount }}
     selector:
         matchLabels:
-            app: "{{ .Chart.name }}"
+            app: "{{ .Chart.Name }}"
             release: "{{ .Release.Name }}"
     template:
         metadata:
-            app: "{{ .Chart.name }}"
+            app: "{{ .Chart.Name }}"
             release: "{{ .Release.Name }}"
         spec:
             containers:
-            - name: "{{ .Chart.name }}"
+            - name: "{{ .Chart.Name }}"
               image: "{{ .Values.image }}:{{ .Values.imageTag}}"
               imagePullPolicy: Always
               resources:
@@ -89,7 +89,7 @@ spec:
             volumes:
             - name: zomboidData
               persistentVolumeClaim:
-                claimName: "{{ .Chart.name }}-pvc-data"
+                claimName: "{{ .Chart.Name }}-pvc-data"
             - name: zomboidConfig
               persistentVolumeClaim:
-                claimName: "{{ .Chart.name }}-pvc-config"
+                claimName: "{{ .Chart.Name }}-pvc-config"
