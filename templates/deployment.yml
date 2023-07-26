@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: "{{ .Chart.name }}-server"
+    labels:
+        app: "{{ .Chart.name }}"
+        chart: "{{ .Chart.name }}-{{ .Chart.Version }}"
+        release: "{{ .Release.Name }}"
+        heritage: "{{ .Release.Service }}"
+spec:
+    replicas: {{ .Values.replicaCount }}
+    selector:
+        matchLabels:
+            app: "{{ .Chart.name }}"
+            release: "{{ .Release.Name }}"
+    template:
+        metadata:
+            app: "{{ .Chart.name }}"
+            release: "{{ .Release.Name }}"
+        spec:
+            containers:
+            - name: "{{ .Chart.name }}"
+              image: "{{ .Values.image }}:{{ .Values.imageTag}}"
+              imagePullPolicy: Always
+              resources:
+                requests:
+                    memory: "{{ .Values.resources.requests.memory }}"
+                    cpu: "{{ .Values.resources.requests.cpu }}"
+              env:
+              - name: ADMIN_PASSWORD
+                value: "{{ .Values.env.adminPassword }}"
+              - name: ADMIN_USERNAME
+                value: "{{ .Values.env.adminUsername }}"
+              - name: AUTOSAVE_INTERVAL
+                value: "{{ .Values.env.autosaveInterval }}"
+              - name: BIND_IP
+                value: "{{ .Values.env.bindIP }}"
+              - name: GAME_PORT
+                value: "{{ .Values.env.gamePort }}"
+              - name: GAME_VERSION
+                value: "{{ .Values.env.gameVersion }}"
+              - name: GC_CONFIG
+                value: "{{ .Values.env.gcConfig }}"
+              - name: MAP_NAMES
+                value: "{{ .Values.env.mapNames }}"
+              - name: MAX_PLAYERS
+                value: "{{ .Values.env.maxPlayers }}"
+              - name: MAX_RAM
+                value: "{{ .Values.env.maxRAM }}"
+              - name: MOD_NAMES
+                value: "{{ .Values.env.modNames }}"
+              - name: MOD_WORKSHOP_IDS
+                value: "{{ .Values.env.modWorkshopIDs }}"
+              - name: PAUSE_ON_EMPTY
+                value: "{{ .Values.env.pauseOnEmpty }}"
+              - name: PUBLIC_SERVER
+                value: "{{ .Values.env.publicServer }}"
+              - name: QUERY_PORT
+                value: "{{ .Values.env.queryPort }}"
+              - name: RCON_PASSWORD
+                value: "{{ .Values.env.rconPassword }}"
+              - name: RCON_PORT
+                value: "{{ .Values.env.rconPort }}"
+              - name: SERVER_NAME
+                value: "{{ .Values.env.serverName }}"
+              - name: SERVER_PASSWORD
+                value: "{{ .Values.env.serverPassword }}"
+              - name: STEAM_VAC
+                value: "{{ .Values.env.steamVAC }}"
+              - name: TZ
+                value: "{{ .Values.env.tZ }}"
+              - name: USE_STEAM
+                value: "{{ .Values.env.useSteam }}"
+              ports:
+              - name: game-port
+                containerPort: {{ .Values.env.gamePort | int }}
+                protocol: UDP
+              - name: query-port
+                containerPort: {{ .Values.env.queryPort | int }}
+                protocol: UDP
+              - name: rcon-port
+                containerPort: {{ .Values.env.rconPort | int }}
+                protocol: TCP
+              volumeMounts:
+              - name: zomboidData
+                mountPath: /home/steam/ZomboidDedicatedServer
+              - name: zomboidConfig
+                mountPath: /home/steam/Zomboid
+            volumes:
+            - name: zomboidData
+              persistentVolumeClaim:
+                claimName: "{{ .Chart.Name }}-pvc-data"
+            - name: zomboidConfig
+              persistentVolumeClaim:
+                claimName: "{{ .Chart.Name }}-pvc-config"

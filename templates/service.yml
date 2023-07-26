@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: "{{ .Chart.name }}-service"
+    labels:
+        app: "{{ .Chart.name }}"
+        chart: "{{ .Chart.name }}-{{ .Chart.Version }}"
+        release: "{{ .Release.Name }}"
+        heritage: "{{ .Release.Service }}"
+spec:
+    type: {{ .Values.serviceType }}
+    ports:
+    {{- if eq "LoadBalancer" .Values.serviceType }}
+    - name: game-port
+      port: {{ .Values.env.gamePort | int }}
+      targetPort: game-port
+      protocol: UDP
+    - name: query-port
+      port: {{ .Values.env.queryPort | int }}
+      targetPort: query-port
+      protocol: UDP
+    - name: rcon-port
+      port: {{ .Values.env.rconPort | int }}
+      targetPort: rcon-port
+      protocol: TCP
+    {{- else }}
+    - name: game-port
+      port: {{ .Values.env.gamePort | int }}
+      targetPort: game-port
+      nodePort: {{ .Values.env.gamePort | int }}
+      protocol: UDP
+    - name: query-port
+      port: {{ .Values.env.queryPort | int }}
+      targetPort: query-port
+      nodePort: {{ .Values.env.queryPort | int }}
+      protocol: UDP
+    - name: rcon-port
+      port: {{ .Values.env.rconPort | int }}
+      targetPort: rcon-port
+      nodePort: {{ .Values.env.rconPort | int }}
+      protocol: TCP
+    {{- end }}
+    selector:
+        app: "{{ .Chart.Name }}"

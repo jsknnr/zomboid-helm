@@ -1,0 +1,38 @@
+image: sknnr/project-zomboid-server
+imageTag: latest
+# serviceType should be LoadBalancer or NodePort
+serviceType: LoadBalancer
+resources:
+  requests:
+    memory: 16G
+    cpu: 6.0
+volumes:
+  dataPVC:
+    size: 50Gi
+  configPVC:
+    size: 50Gi
+  storageClassName: local-path
+env:
+  adminPassword: changeme
+  adminUsername: admin
+  autosaveInterval: 15m
+  bindIP: 0.0.0.0
+  gamePort: 16261
+  gameVersion: public
+  gcConfig: ZGC
+  mapNames: Muldraugh, KY
+  maxPlayers: 16
+  maxRAM: 16384m
+  modNames: ''
+  modWorkshopIDs: ''
+  pauseOnEmpty: true
+  publicServer: true
+  queryPort: 16262
+  rconPassword: changeme
+  rconPort: 27015
+  serverName: Project Zomboid Kubernetes Server
+  serverPassword: sendhelp
+  steamVAC: true
+  tZ: UTC
+  useSteam: true
+  
