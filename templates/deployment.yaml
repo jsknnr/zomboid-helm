@@ -90,12 +90,9 @@ spec:
               livenessProbe:
                 exec:
                   command:
-                  - rcon
-                  - -a 
-                  - $(hostname):$RCON_PORT 
-                  - -p 
-                  - $RCON_PASSWORD 
-                  - players
+                  - bash
+                  - -c
+                  - rcon -a $(hostname):$RCON_PORT -p $RCON_PASSWORD players
                 initialDelaySeconds: 90
                 periodSeconds: 30
             volumes:
