@@ -87,14 +87,6 @@ spec:
                 mountPath: /home/steam/ZomboidDedicatedServer
               - name: zomboid-config
                 mountPath: /home/steam/Zomboid
-              livenessProbe:
-                exec:
-                  command:
-                  - bash
-                  - -c
-                  - rcon -a $(hostname):$RCON_PORT -p $RCON_PASSWORD players
-                initialDelaySeconds: 90
-                periodSeconds: 30
             volumes:
             - name: zomboid-data
               persistentVolumeClaim:
