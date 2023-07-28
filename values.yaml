@@ -23,8 +23,8 @@ env:
   mapNames: Muldraugh, KY
   maxPlayers: 16
   maxRAM: 2048m
-  modNames: ''
-  modWorkshopIDs: ''
+  modNames:
+  modWorkshopIDs:
   pauseOnEmpty: true
   publicServer: true
   queryPort: 16262
