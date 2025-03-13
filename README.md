@@ -1,4 +1,6 @@
-# zomboid-helm
+# DEPRECATED AND ARCHIVED
+I am no longer supporting this repo and image. I have a new repo, image, and helm chart available here https://github.com/jsknnr/project-zomboid-server that is not based on a fork. The new repo is similar to my other work and I like consistency.
+
 Helm Chart for for deploying Project Zomboid server
 
 ## Usage
